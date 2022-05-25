@@ -8,24 +8,24 @@ def home_page(request):
     if request.method=='POST':
         path = request.POST.get('text')
         text = request.POST.get('content')
-        find_files(path,text)
+        l=find_files(path,text)
+        print(l)
     return render(request,template_name='soft_project/test.html')
 
 
 def find_files(path,key):
     l=[]
     for i in os.listdir(path):
-        print(i)
         if key.lower() in i.lower():
-            l.append(i)
+            l.append(path+i)
         filepath=path+'\\'+i
         if(os.path.isfile(filepath)):
             file = open(filepath)
             for j in file:
                 if key in j:
-                    l.append(i)
+                    l.append(filepath)
             file.close()
         else:
-            find_files(filepath,key)
-
-    print(l)
+            for i in find_files(filepath,key):
+                l.append(filepath)
+    return l
