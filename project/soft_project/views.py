@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import os
-from soft_project.models import files,keys
+
 # Create your views here.
 
 def home_page(request):
@@ -9,13 +9,7 @@ def home_page(request):
         path = request.POST.get('text')
         text = request.POST.get('content')
         l=find_files(path,text)
-        t=keys(key=text)
-        t.save()
-        i=keys.objects.latest('id1')
-        print(i)
-        for j in l:
-            f=files(file=j,id1=i)
-            f.save()
+        return render(request,'soft_project/test.html',{'list':l})
     return render(request,template_name='soft_project/test.html')
 
 
