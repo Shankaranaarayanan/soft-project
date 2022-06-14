@@ -18,7 +18,7 @@ def find_files(path,key):
     for i in os.listdir(path):
         if key.lower() in i.lower():
             l.append(i)
-        filepath=path+'\\'+i
+        filepath=path+'/'+i
         if(os.path.isfile(filepath)):
             file = open(filepath)
             for j in file:
